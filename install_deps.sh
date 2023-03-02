@@ -1,11 +1,17 @@
 #!/bin/bash
+DEBIAN_FRONTEND="noninteractive"
 
 apt-get update -y && apt-get upgrade -y
-apt-get install openjdk-19-jre-headless -y
 apt-get install groovy -y
 apt-get install chromium-browser -y
 apt-get install chromium-chromedriver -y
 apt-get install git -y
+
+#Install Java
+wget https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.deb
+apt-get -qqy install ./jdk-19_linux-x64_bin.deb
+update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-19/bin/java 1919
+
 
 #Add local domain for regression test
 echo '127.0.0.1       doms' >> /etc/hosts
